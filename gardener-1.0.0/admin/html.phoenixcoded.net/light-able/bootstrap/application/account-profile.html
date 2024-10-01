@@ -1920,7 +1920,7 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   function fetchSuperAdminProfile(adminId) {
     const baseUrl = "https://localhost:44395/api/SAdmin/GetSuperAdminById/";
 
@@ -1966,10 +1966,49 @@ function updateUIForNoData() {
 fetchSuperAdminProfile(5);  // Replace 5 with the correct admin ID as needed
 
 
+</script> -->
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const bioElement = document.getElementById('bio');
+    const fullNameElement = document.getElementById('fullName');
+    const roleIdElement = document.getElementById('roleId');
+    const phoneNumberElement = document.getElementById('phoneNumber');
+    const countryElement = document.getElementById('country');
+    const emailElement = document.getElementById('email');
+    const zipCodeElement = document.getElementById('zipCode');
+    const addressElement = document.getElementById('address');
+
+    // Fetch and display Super Admin data
+    async function loadSuperAdminData() {
+        try {
+            const response = await fetch('https://localhost:44395/api/SAdmin/GetSuperAdmin');
+            if (response.ok) {
+                const superAdmin = await response.json();
+
+                // Populate the UI with fetched data
+                bioElement.innerText = superAdmin.bio || 'No bio available';
+                fullNameElement.innerText = superAdmin.fullName || 'N/A';
+                roleIdElement.innerText = superAdmin.roleId === 1 ? 'Super Admin' : 'Other Role';
+                phoneNumberElement.innerText = superAdmin.phoneNumber || 'N/A';
+                countryElement.innerText = superAdmin.country || 'N/A';
+                emailElement.innerText = superAdmin.email || 'N/A';
+                zipCodeElement.innerText = superAdmin.zipCode || 'N/A';
+                addressElement.innerText = superAdmin.address || 'N/A';
+            } else {
+                console.error('Failed to fetch Super Admin details');
+            }
+        } catch (error) {
+            console.error('Error fetching Super Admin data:', error);
+        }
+    }
+
+    // Load the Super Admin data on page load
+    loadSuperAdminData();
+});
+
+
+
+
 </script>
-
   </body>
-  <!-- [Body] end -->
-
-<!-- Mirrored from html.phoenixcoded.net/light-able/bootstrap/application/account-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 09:57:49 GMT -->
-</html>
+  </html>

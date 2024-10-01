@@ -762,11 +762,13 @@
               </ul>
       
               <!-- Tab Content -->
+
               <div class="tab-content mt-3">
       
                   <!-- Food Donations Tab -->
                   <div class="tab-pane fade show active" id="foodDonations">
                       <h4>Food Donations</h4>
+                      <div class="table-responsive">
                       <table class="table table-bordered">
                           <thead>
                               <tr>
@@ -780,11 +782,13 @@
                           </thead>
                           <tbody id="foodDonationsTable"></tbody>
                       </table>
+                      </div>
                   </div>
       
                   <!-- Money Donations Tab -->
                   <div class="tab-pane fade" id="moneyDonations">
                       <h4>Money Donations</h4>
+                      <div class="table-responsive">
                       <table class="table table-bordered">
                           <thead>
                               <tr>
@@ -798,11 +802,13 @@
                           </thead>
                           <tbody id="moneyDonationsTable"></tbody>
                       </table>
+                    </div>
                   </div>
       
                   <!-- Restaurant Donations Tab -->
                   <div class="tab-pane fade" id="restaurantDonations">
                       <h4>Restaurant Donations</h4>
+                      <div class="table-responsive">
                       <table class="table table-bordered">
                           <thead>
                               <tr>
@@ -818,6 +824,7 @@
                           <tbody id="restaurantDonationsTable"></tbody>
                       </table>
                   </div>
+                </div>
       
               </div>
           </div>
@@ -1284,16 +1291,17 @@
                           <td>${new Date(donation.createdAt).toLocaleDateString()}</td>
                           <td>${donation.isApproved ? 'Approved' : 'Pending'}</td>
                           <td>
-                              <button class="btn btn-success btn-sm" onclick="approveDonation('food', ${donation.donationID})">Approve</button>
-                              <button class="btn btn-danger btn-sm" onclick="rejectDonation('food', ${donation.donationID})">Reject</button>
-                              <button class="btn btn-warning btn-sm" onclick="deleteDonation('food', ${donation.donationID})">Delete</button>
+                              <button class="btn btn-success btn-sm" onclick="approveDonation(${donation.donationID})">Approve</button>
+                               <button class="btn btn-warning btn-sm" onclick="deleteDonation(${donation.donationId})">Delete</button>
+
                           </td>
                       </tr>
                   `;
               });
           });
 
-      // Fetch money donations from API and populate the table
+          
+      //Fetch money donations from API and populate the table
       fetch('https://localhost:44395/api/SAdmin/api/MoneyDonations')
           .then(response => response.json())
           .then(data => {
@@ -1308,20 +1316,20 @@
                           <td>${new Date(donation.createdAt).toLocaleDateString()}</td>
                           <td>${donation.isApproved ? 'Approved' : 'Pending'}</td>
                           <td>
-                              <button class="btn btn-success btn-sm" onclick="approveDonation('money', ${donation.donationID})">Approve</button>
-                              <button class="btn btn-danger btn-sm" onclick="rejectDonation('money', ${donation.donationID})">Reject</button>
-                              <button class="btn btn-warning btn-sm" onclick="deleteDonation('money', ${donation.donationID})">Delete</button>
+                              <button class="btn btn-success btn-sm" onclick="approveDonation(${donation.donationID})">Approve</button>
+                              <button class="btn btn-warning btn-sm" onclick="deleteDonation2(${donation.donationId})">Delete</button>
                           </td>
                       </tr>
                   `;
               });
           });
 
-      // Fetch restaurant donations from API and populate the table
+      //Fetch restaurant donations from API and populate the table
       fetch('https://localhost:44395/api/SAdmin/api/RestaurantDonations')
           .then(response => response.json())
           .then(data => {
               let tableBody = document.getElementById('restaurantDonationsTable');
+              debugger;
               tableBody.innerHTML = '';
               data.forEach(donation => {
                   tableBody.innerHTML += `
@@ -1333,9 +1341,8 @@
                           <td>${new Date(donation.createdAt).toLocaleDateString()}</td>
                           <td>${donation.isApproved ? 'Approved' : 'Pending'}</td>
                           <td>
-                              <button class="btn btn-success btn-sm" onclick="approveDonation('restaurant', ${donation.donationID})">Approve</button>
-                              <button class="btn btn-danger btn-sm" onclick="rejectDonation('restaurant', ${donation.donationID})">Reject</button>
-                              <button class="btn btn-warning btn-sm" onclick="deleteDonation('restaurant', ${donation.donationID})">Delete</button>
+                              <button class="btn btn-success btn-sm" onclick="approveDonation(${donation.donationID})">Approve</button>
+                              <button class="btn btn-warning btn-sm" onclick="deleteDonation3( ${donation.donationId})">Delete</button>
                           </td>
                       </tr>
                   `;
@@ -1343,38 +1350,82 @@
           });
 
       // Approve donation
-      function approveDonation(type, id) {
-          fetch(`api/${type}Donations/${id}/approve`, { method: 'PUT' })
+      function approveDonation(id) {
+          fetch(`https://localhost:44395/api/SAdmin/api/MoneyDonations/${id}/approve`, { method: 'PUT' })
               .then(() => alert('Donation approved successfully'))
               .then(() => location.reload());
       }
 
-      // Reject donation
-      function rejectDonation(type, id) {
-          fetch(`api/${type}Donations/${id}/reject`, { method: 'PUT' })
-              .then(() => alert('Donation rejected successfully'))
-              .then(() => location.reload());
-      }
+      // Delete foood donation
 
-      // Delete donation
-      function deleteDonation(type, id) {
-    fetch(`https://localhost:44395/api/SAdmin/api/${type}Donations/${id}`, { method: 'DELETE' })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to delete donation');
-            }
-            alert('Donation deleted successfully');
-            document.getElementById(`donation-${id}`).remove(); // Remove row from table
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error deleting donation');
-        });
-}
+async function deleteDonation(Id) {
+  const confirmDelete = confirm('Are you sure you want to delete this food?');
+  if (confirmDelete) {
+  try {
+                  const response = await fetch(`https://localhost:44395/api/SAdmin/api/FoodDonations/${Id}`, {
+                      method: 'DELETE'
+                  });
+                  
+                  if (response.ok) {
+                      alert('food deleted successfully.');
+                      loadDeletion(); 
+                  } else {
+                      alert('Failed to delete food.');
+                  }
+                } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('An error eccured ');
+              }
+          }
+        }
+
+        ////////////////////////////delete money
+        async function deleteDonation2(Id) {
+  const confirmDelete = confirm('Are you sure you want to delete this item?');
+  if (confirmDelete) {
+  try {
+                  const response = await fetch(`https://localhost:44395/api/SAdmin/api/MoneyDonations/${Id}`, {
+                      method: 'DELETE'
+                  });
+                  
+                  if (response.ok) {
+                      alert('Item deleted successfully.');
+                      loadDeletion(); 
+                  } else {
+                      alert('Failed to delete Item.');
+                  }
+                } catch (error) {
+                console.error('Error deleting Item:', error);
+                alert('ASuccessfully deleted ');
+              }
+          }
+      
+        }
+
+        ///////////////////// delete restaurant
+        async function deleteDonation3(Id) {
+  const confirmDelete = confirm('Are you sure you want to delete this item?');
+  if (confirmDelete) {
+  try {
+                  const response = await fetch(`https://localhost:44395/api/SAdmin/api/RestaurantDonations/${Id}`, {
+                      method: 'DELETE'
+                  });
+                  
+                  if (response.ok) {
+                      alert('Item deleted successfully.');
+                      loadDeletion(); 
+                  } else {
+                      alert('Failed to delete Item.');
+                  }
+                } catch (error) {
+                console.error('Error deleting Item:', error);
+                alert('Successfully deleted');
+              }
+          }
+        }
+
   </script>
 
   </body>
-  <!-- [Body] end -->
-
-<!-- Mirrored from html.phoenixcoded.net/light-able/bootstrap/application/ecom_product-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 09:57:42 GMT -->
 </html>
+        
