@@ -76,41 +76,24 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <div class="navbar-nav ms-auto p-4 p-lg-0" id="navbar-links">
             <a href="index.html" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu bg-light m-0">
-                    <a href="blogs.html" class="dropdown-item">Blogs</a>
-                    <a href="storelist.html" class="dropdown-item">Restaurant Lists</a>
-                    <a href="shop.html" class="dropdown-item">Shop</a>
-                    <!-- <a href="product.html" class="dropdown-item">Single Product</a> -->
-                    <a href="myaccount.html" class="dropdown-item">My Account</a>
-                    <a href="subAdmin/uena.dexignzone.com/cakephp/demo/uena-admin/AdminDash.html" class="dropdown-item">Super Admin</a>
-                    <a href="admin/html.phoenixcoded.net/light-able/bootstrap/application/account-profile.html" class="dropdown-item">Admin</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
-                </div>
-            </div>
+            <a href="storelist.html" class="nav-item nav-link active">Deals</a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
-            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;" >Donate</a>
+            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
 
-       
-<!-- Join Us Button -->
-<a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
-<i class="fa fa-arrow-right ms-3"></i></a>
+            <!-- Cart and Profile (Hidden by default) -->
+            <a href="cart.html" class="nav-item nav-link d-none" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart</a>
+            <a href="myaccount.html" class="nav-item nav-link d-none" id="profileLink"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" class="nav-item nav-link d-none" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a>
 
-<!-- Popup Section -->
-<div id="joinUsPopup" class="login-popup">
-<a href="login.html" class="button-main w-full text-center">Login</a>
-<div class="text-secondary text-center mt-2 pb-3" style="font-size: large;">
-    Don’t have an account?
-    <a href="register.html" class="text-black pl-1 hover:underline">Register</a>
-</div>
-<div class="bottom pt-3 border-t border-line"></div>
-<a href="#!" class="body1 hover:underline">Support</a>
-</div>
+            <!-- Join Us Button (Visible by default) -->
+            <a href="login.html" class="btn btn-primary py-4 px-lg-4 rounded-0 d-lg-block" id="loginLink">Join Us
+                <i class="fa fa-arrow-right ms-3"></i>
+            </a>
+        </div>
     </div>
 </nav>
 <!-- Navbar End -->
@@ -142,19 +125,19 @@
                         <p id="userEmail">hi.avitex@gmail.com</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex align-items-center" onclick="showSection('accountDetails')">
+                        <li class="list-group-item d-flex align-items-center" onclick="showSections('accountDetails')">
                             <i class="bi bi-person-fill me-2"></i> Account Details
                         </li>
-                        <li class="list-group-item d-flex align-items-center" onclick="showSection('orders')">
+                        <li class="list-group-item d-flex align-items-center" onclick="showSections('orders')">
                             <i class="bi bi-bag-fill me-2"></i> Your Orders
                         </li>
-                        <li class="list-group-item d-flex align-items-center" onclick="showSection('address')">
+                        <li class="list-group-item d-flex align-items-center" onclick="showSections('address')">
                             <i class="bi bi-geo-alt-fill me-2"></i> My Address
                         </li>
-                        <li class="list-group-item d-flex align-items-center" onclick="showSection('changePassword')">
+                        <li class="list-group-item d-flex align-items-center" onclick="showSections('changePassword')">
                             <i class="bi bi-lock-fill me-2"></i> Change Password
                         </li>
-                        <li class="list-group-item d-flex align-items-center" onclick="showSection('logout')">
+                        <li class="list-group-item d-flex align-items-center" onclick="showSections('logout')">
                             <i class="bi bi-box-arrow-right me-2"></i> Logout
                         </li>
                     </ul>
@@ -164,7 +147,7 @@
             <!-- Right Panel: Account Information -->
             <div class="col-md-8">
                 <!-- Account Details Section -->
-                <div class="card p-4 section" id="accountDetails">
+                <div class="card p-4 section d-none" id="accountDetails">
                     <h4 class="mb-4">Information</h4>
                     <form>
                         <div class="row mb-3">
@@ -215,9 +198,9 @@
                 </div>
     
                 <!-- Orders Section -->
-                <div class="card p-4 section d-none" id="orders">
+                <div class="card p-4 section d-none" id="ordersSection">
                     <h4 class="mb-4">Your Orders</h4>
-                    <p>List of your recent orders will be displayed here...</p>
+                    <div id="ordersContainer"></div>
                 </div>
     
                 <!-- Address Section -->
@@ -234,8 +217,6 @@
             </div>
         </div>
     </div>
-
-    
 
 
 
@@ -366,6 +347,103 @@
                 }
             }
         </script>
+
+
+<script src="path/to/auth.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+// Check if the user is already logged in
+if (sessionStorage.getItem('isLoggedIn') === 'true') {
+    showLoggedInNavbar();
+} else {
+    showLoggedOutNavbar();
+}
+
+function showLoggedInNavbar() {
+    document.getElementById('navbar-links').innerHTML = `
+        <a href="index.html" class="nav-item nav-link active">Home</a>
+        <a href="myaccount.html" class="nav-item nav-link">Profile</a>
+        <a href="cart.html" class="nav-item nav-link">Cart</a>
+        <a href="javascript:void(0);" class="nav-item nav-link" onclick="logoutUser()">Logout</a>
+        <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
+    `;
+}
+
+function showLoggedOutNavbar() {
+    document.getElementById('navbar-links').innerHTML = `
+        <a href="index.html" class="nav-item nav-link active">Home</a>
+        <a href="about.html" class="nav-item nav-link">About</a>
+        <a href="service.html" class="nav-item nav-link">Services</a>
+                    <a href="storelist.html" class="nav-item nav-link active">Deals</a>
+
+        <a href="contact.html" class="nav-item nav-link">Contact</a>
+        <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
+        <a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
+            <i class="fa fa-arrow-right ms-3"></i>
+        </a>
+        <div id="joinUsPopup" class="login-popup" style="display: none;">
+            <a href="login.html" class="button-main w-full text-center">Login</a>
+            <div class="text-secondary text-center mt-2 pb-3" style="font-size: large;">
+                Don’t have an account?
+                <a href="register.html" class="text-black pl-1 hover:underline">Register</a>
+            </div>
+            <div class="bottom pt-3 border-t border-line"></div>
+            <a href="#!" class="body1 hover:underline">Support</a>
+        </div>
+    `;
+}
+
+window.logoutUser = function () {
+    // Remove login status
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('username');
+    showLoggedOutNavbar(); // Update the navbar
+    window.location.href = 'index.html'; // Redirect to home or login page after logout
+}
+});
+
+</script>
+
+<!--order-->
+<script>
+    function showSections(section) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(s => s.classList.add('d-none'));
+    
+        if (section === 'orders') {
+            const userId = 2; // Replace with the actual logged-in user's ID
+            fetch(`https://localhost:44395/api/Order/user/${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(orders => {
+                    const ordersContainer = document.getElementById('ordersContainer');
+                    ordersContainer.innerHTML = ''; // Clear existing orders
+                    orders.forEach(order => {
+                        ordersContainer.innerHTML += `
+                            <div class="order">
+                                <h5>${order.FoodName}</h5>
+                                <p>Quantity: ${order.Quantity}</p>
+                                <p>Total Price: $${order.TotalPrice}</p>
+                                <p>Order Date: ${new Date(order.OrderDate).toLocaleDateString()}</p>
+                            </div>
+                        `;
+                    });
+                    // Show the orders section after fetching orders
+                    document.getElementById('ordersSection').classList.remove('d-none');
+                })
+                .catch(error => console.error('Error fetching orders:', error));
+        } else {
+            // Show the selected section
+            document.getElementById(section).classList.remove('d-none');
+        }
+    }
+    </script>
+
 </body>
 
 </html>

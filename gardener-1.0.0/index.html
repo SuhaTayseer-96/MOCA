@@ -74,51 +74,38 @@
 
 
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h1 class="m-0">FAI<span style="color: #FFC107;">D</span></h1>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Services</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="blogs.html" class="dropdown-item">Blogs</a>
-                        <a href="storelist.html" class="dropdown-item">Restaurant Lists</a>
-                        <a href="shop.html" class="dropdown-item">Shop</a>
-                        <!-- <a href="product.html" class="dropdown-item">Single Product</a> -->
-                        <a href="myaccount.html" class="dropdown-item">My Account</a>
-                        <a href="subAdmin/uena.dexignzone.com/cakephp/demo/uena-admin/AdminDash.html" class="dropdown-item">Super Admin</a>
-                        <a href="admin/html.phoenixcoded.net/light-able/bootstrap/application/account-profile.html" class="dropdown-item">Admin</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;" >Donate</a>
+    <!-- Navbar Start -->
+   <!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h1 class="m-0">FAI<span style="color: #FFC107;">D</span></h1>
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0" id="navbar-links">
+            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="service.html" class="nav-item nav-link">Services</a>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="storelist.html" class="nav-item nav-link active">Deals</a>
+            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
 
-           
-<!-- Join Us Button -->
-<a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
-    <i class="fa fa-arrow-right ms-3"></i></a>
+            <!-- Cart and Profile (Hidden by default) -->
+            <a href="cart.html" class="nav-item nav-link d-none" id="cartLink"><i class="fas fa-shopping-cart"></i> Cart</a>
+            <a href="myaccount.html" class="nav-item nav-link d-none" id="profileLink"><i class="fas fa-user"></i> Profile</a>
+            <a href="#" class="nav-item nav-link d-none" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a>
 
-<!-- Popup Section -->
-<div id="joinUsPopup" class="login-popup">
-    <a href="login.html" class="button-main w-full text-center">Login</a>
-    <div class="text-secondary text-center mt-2 pb-3" style="font-size: large;">
-        Don’t have an account?
-        <a href="register.html" class="text-black pl-1 hover:underline">Register</a>
-    </div>
-    <div class="bottom pt-3 border-t border-line"></div>
-    <a href="#!" class="body1 hover:underline">Support</a>
-</div>
+            <!-- Join Us Button (Visible by default) -->
+            <a href="login.html" class="btn btn-primary py-4 px-lg-4 rounded-0 d-lg-block" id="loginLink">Join Us
+                <i class="fa fa-arrow-right ms-3"></i>
+            </a>
         </div>
-    </nav>
+    </div>
+</nav>
+
+
     <!-- Navbar End -->
 
     <!-- Carousel Start -->
@@ -299,33 +286,36 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="deal-content">
-          <h3>Best Price For You</h3>
+          <h1>Best Price For You</h1>
+          <h3>Available for a Limited Time!</h3>
+          <h2>Don’t miss out on today's special meal offering. Freshly prepared and available to you for a limited time.
+          </h2>
+          <!-- <h3><span class="price">$10</span> <span class="text-muted">now $5 only</span></h3> -->
+          <!-- <h3>Best Price For You</h3>
           <h2>Available for a Limited Time!</h2>
           <p>Don’t miss out on today's special meal offering. Freshly prepared and available to you for a limited time.
-          </p>
-          <!-- <h3><span class="price">$10</span> <span class="text-muted">now $5 only</span></h3> -->
-
+          </p> -->
           <!-- Countdown Timer -->
-          <div class="deal-timer">
+          <!-- <div class="deal-timer"> -->
             <!-- <div>
               <span class="number" id="days">0</span>
               <span class="label">Days</span>
             </div> -->
-            <div>
+            <!-- <div>
               <span class="number" id="hours">0</span>
               <span class="label">Hours</span>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
               <span class="number" id="minutes">0</span>
               <span class="label">Minutes</span>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
               <span class="number" id="seconds">0</span>
               <span class="label">Seconds</span>
             </div>
-          </div>
+          </div> -->
           
-          <a href="comingsoon.html" class="btn btn-success py-3 px-5" type="button">Shop Now</a>
+          <a href="storelist.html" class="btn btn-success py-3 px-5" type="button">Shop Now</a>
         </div>
       </div>
     </div>
@@ -640,6 +630,7 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+    <script src="path/to/auth.js"></script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -739,15 +730,63 @@ document.addEventListener('DOMContentLoaded', fetchNewsPosts);
 
 <!--Partners-->
 <!-- <script>
-const swiper = new Swiper('.swiper-list-brand', {
-    slidesPerView: 4, // Number of visible slides
-    spaceBetween: 15, // Space between slides
-    loop: true,       // Loop through the slides
-    autoplay: {
-        delay: 3000,  // Auto-slide every 3 seconds
-    },
-});
+
 </script> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if the user is already logged in
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            showLoggedInNavbar();
+        } else {
+            showLoggedOutNavbar();
+        }
+
+        function showLoggedInNavbar() {
+            document.getElementById('navbar-links').innerHTML = `
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="storelist.html" class="nav-item nav-link active">Shop</a>
+                <a href="myaccount.html" class="nav-item nav-link">Profile</a>
+                <a href="cart.html" class="nav-item nav-link">Cart</a>
+                <a href="javascript:void(0);" class="nav-item nav-link" onclick="logoutUser()">Logout</a>
+                <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
+            `;
+        }
+
+        function showLoggedOutNavbar() {
+            document.getElementById('navbar-links').innerHTML = `
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="storelist.html" class="nav-item nav-link active">Deals</a>
+
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
+                <a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
+                    <i class="fa fa-arrow-right ms-3"></i>
+                </a>
+                <div id="joinUsPopup" class="login-popup" style="display: none;">
+                    <a href="login.html" class="button-main w-full text-center">Login</a>
+                    <div class="text-secondary text-center mt-2 pb-3" style="font-size: large;">
+                        Don’t have an account?
+                        <a href="register.html" class="text-black pl-1 hover:underline">Register</a>
+                    </div>
+                    <div class="bottom pt-3 border-t border-line"></div>
+                    <a href="#!" class="body1 hover:underline">Support</a>
+                </div>
+            `;
+        }
+
+        function logoutUser() {
+            // Remove login status
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            showLoggedOutNavbar(); // Update the navbar
+            window.location.href = 'index.html'; // Redirect to home or login page after logout
+        }
+    });
+</script>
+
 </body>
 
 </html>
