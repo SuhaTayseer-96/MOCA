@@ -367,6 +367,59 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+<script>
+    // Function to render cart items on the cart page
+    function renderCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || []; // Get the cart from localStorage
+        const cartContainer = document.querySelector('.row gy-3.mb-4'); // Adjust to your cart's container element
+
+        cartContainer.innerHTML = ''; // Clear the container
+
+        // Iterate through each item in the cart and add it to the cart page
+        cart.forEach((item, index) => {
+            cartContainer.innerHTML += `
+                <div class="col-lg-5">
+                    <div class="me-lg-5">
+                        <div class="d-flex">
+                            <img src="img/menu/1.jpg" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                            <div class="">
+                                <a href="#" class="nav-link">${item.foodName}</a>
+                                <p class="text-muted">${item.comments}</p>
+                                <p>Pickup Time: ${item.pickupTime}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                    <div class="">
+                        <select style="width: 100px;" class="form-select me-4">
+                            <option>${item.quantity}</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <text class="h6">$${item.price}</text> <br />
+                    </div>
+                </div>
+                <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                    <div class="float-md-end">
+                        <a href="#!" class="btn btn-light border text-danger icon-hover-danger" onclick="removeItem(${index})"> Remove</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Function to remove an item from the cart
+    function removeItem(index) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);  // Remove the item at the specified index
+        localStorage.setItem('cart', JSON.stringify(cart));  // Save the updated cart back to localStorage
+        renderCart();  // Re-render the cart
+    }
+
+    // Call renderCart when the page loads
+    window.onload = renderCart;
+</script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -383,6 +436,7 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
 
     
 </body>
