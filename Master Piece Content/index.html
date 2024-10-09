@@ -73,8 +73,7 @@
     <!-- Topbar End -->
 
 
-    <!-- Navbar Start -->
-    <!-- Navbar Start -->
+    
    <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
@@ -90,15 +89,17 @@
             <a href="service.html" class="nav-item nav-link">Services</a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
             <a href="storelist.html" class="nav-item nav-link active">Deals</a>
-            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
 
-            <!-- Cart and Profile (Hidden by default) -->
-           
+            <a href="myaccount.html" id="profileLink1" class="nav-item nav-link active" style="display:none;">Profile </a>
+        <a href="RestAccount.html" id="profileLink2" class="nav-item nav-link active" style="display:none;">Profile </a>
+        <a href="cart.html" id="cartLink" class="nav-item nav-link active" style="display:none;">Cart</a>
 
-            <!-- Join Us Button (Visible by default) -->
-            <a href="login.html" id="authButton" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Join us
-                <i class="fa fa-arrow-right ms-3"></i></a>
+        <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
 
+        <!-- Join Us Button (Visible by default) -->
+        <a href="login.html" id="authButton" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Join us
+            <i class="fa fa-arrow-right ms-3"></i></a>
+          
                 
                 <!-- <div id="joinUsPopup" class="login-popup">
                     <a href="login.html" class="button-main w-full text-center">Login</a>
@@ -589,26 +590,24 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Services</h4>
-                    <a class="btn btn-link" href="">Landscaping</a>
-                    <a class="btn btn-link" href="">Pruning plants</a>
-                    <a class="btn btn-link" href="">Urban Gardening</a>
-                    <a class="btn btn-link" href="">Garden Maintenance</a>
-                    <a class="btn btn-link" href="">Green Technology</a>
+                    <a class="btn btn-link" href="service.html#food-collection">Food Collection</a>
+                    <a class="btn btn-link" href="service.html#food-distribution">Food Distribution</a>
+                    <a class="btn btn-link" href="service.html#partnerships">Partnership</a>
+                    <a class="btn btn-link" href="index.html#dealsection">Deals</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="service.html">Our Services</a>
+                    <a class="btn btn-link" href="service.html">Latest News</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <h4 class="text-white mb-4">Donate Now</h4>
+                    <p>Help Us Make a Difference</p>
                     <div class="position-relative w-100">
                         <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Join Us</button>
                     </div>
                 </div>
             </div>
@@ -618,29 +617,28 @@
 
 
     <!-- Copyright Start -->
-    <div class="container-fluid copyright py-4">
+    <!-- <div class="container-fluid copyright py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="" href="#">FAID</a>, All Right Reserved.
+                <div style="text-align: center;" class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="" href="#" >FAID</a>, All Right Reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Copyright End -->
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-    <!-- <script src="path/to/auth.js"></script> -->
 
 
     <!--Join us ////////////////-->
-    <script>
+    <!-- <script>
 
 
         var authButton = document.getElementById("authButton");
@@ -650,6 +648,7 @@
             var userId = localStorage.getItem('userId');
             if (userId) {
                 authButton.innerText = "Logout";
+
                 authButton.href = "#"; // 
                 authButton.addEventListener('click', logout); //
     
@@ -664,15 +663,66 @@
     
         function logout() {
             localStorage.removeItem('userId');
-            alert("Logged in Successfully");
+            alert("Logged out Successfully");
     
             window.location.href = "index.html";
         }
     
         document.addEventListener('DOMContentLoaded', checkLoginStatus);
     
-            </script>
+            </script> -->
 
+            <script>
+                var authButton = document.getElementById("authButton");
+                var profileLink1 = document.getElementById("profileLink1");
+                var profileLink2 = document.getElementById("profileLink2");
+                var cartLink = document.getElementById("cartLink");
+            
+                function checkLoginStatus() {
+                    var userId = localStorage.getItem('userId');
+                    var userEmail = localStorage.getItem('userEmail'); // Assume the email is stored in localStorage
+                    
+                    if (userId) {
+                        authButton.innerText = "Logout";
+                        authButton.href = "#"; 
+                        authButton.addEventListener('click', logout); 
+            
+                        // Show the appropriate profile link based on the user's email
+                        if (userEmail === "suha@user.com") {
+                            profileLink1.style.display = "inline-block"; // Show for specific email
+                        } else if (userEmail === "spoonpalace@rest.com") {
+                            profileLink2.style.display = "inline-block"; // Show for another email
+                        }
+            
+                        cartLink.style.display = "inline-block"; // Always show cart link
+                        profileLink1.style.display="inline-block";
+                        profileLink1.style.display="inline-block";
+
+
+//                         if (userEmail === "s@admin.com") { 
+//     window.location.href = "/admin/html.phoenixcoded.net/light-able/bootstrap/application/account-profile.html";
+// }
+
+                    } else {
+                        authButton.innerText = "Join Us";
+                        authButton.href = "login.html"; 
+            
+                        // Hide profile links and cart link
+                        profileLink1.style.display = "none";
+                        profileLink2.style.display = "none";
+                        cartLink.style.display = "none";
+                    }
+                }
+            
+                function logout() {
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('userEmail'); // Remove the email from localStorage as well
+                    alert("Logged out Successfully");
+                    window.location.href = "index.html";
+                }
+            
+                document.addEventListener('DOMContentLoaded', checkLoginStatus);
+            </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
