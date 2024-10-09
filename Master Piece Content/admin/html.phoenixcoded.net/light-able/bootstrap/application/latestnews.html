@@ -1056,7 +1056,6 @@
                                   <i class="material-icons-two-tone f-18">more_vert</i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                  <a class="dropdown-item" href="#" onclick="editPost(${post.id})">Edit</a>
                                   <a class="dropdown-item" href="#" onclick="deletePost(${post.postId})">Delete</a>
                                 </div>
                               </div>
@@ -1194,8 +1193,7 @@ function deletePost(postId) {
             <small>Published on ${new Date(post.publishedDate).toLocaleString()}</small>
         `;
         blogPostsContainer.prepend(postElement);
-        location.reload();
- // Add the new post to the top of the list
+         // Add the new post to the top of the list
     }
 });
 
