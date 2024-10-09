@@ -37,6 +37,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <style>
 
 
@@ -447,21 +448,22 @@ a {
                                                 <div data-bs-toggle="collapse">
                                                     <label class="card-radio-label mb-0">
                                                         <input type="radio" name="address" id="info-address1" class="card-radio-input" checked="">
-                                                        <div class="card-radio text-truncate p-3">
-                                                            <span class="fs-14 mb-4 d-block">Address 1</span>
-                                                            <span class="fs-14 mb-2 d-block">Bradley McMillian</span>
-                                                            <span class="text-muted fw-normal text-wrap mb-1 d-block">109 Clarksburg Park Road Show Low, AZ 85901</span>
-                                                           
-                                                            <span class="text-muted fw-normal d-block">Mo. 012-345-6789</span>
+                                                        <div class="card-radio text-truncate p-3" id="userAddressCard">
+                                                            <!-- Dynamically injected data -->
+                                                            <span class="fs-14 mb-4 d-block" id="addressTitle">Address 1</span>
+                                                            <span class="fs-14 mb-2 d-block" id="userName">Bradley McMillian</span>
+                                                            <span class="text-muted fw-normal text-wrap mb-1 d-block" id="addressInput"></span>
+                                                            <span class="text-muted fw-normal d-block" id="phoneInput"></span>
                                                         </div>
                                                     </label>
-                                                    <div class="edit-btn bg-light  rounded">
-                                                        <a href="#" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit">
+                                                    <div class="edit-btn bg-light rounded">
+                                                        <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Edit">
                                                             <i class="bx bx-pencil font-size-16"></i>
                                                         </a>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
 
                                             <div class="col-lg-4 col-sm-6">
                                                 <div>
@@ -511,29 +513,27 @@ a {
                                                 </label>
                                             </div>
                                         </div> -->
-                                        
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div>
-                                              <label class="card-radio-label">
-                                                <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" onclick="showPayPalButton()">
+                                        <div>
+                                            <div class="col-lg-3 col-sm-6">
+
+                                            <label class="card-radio-label">
+                                                <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input" onclick="togglePaypalBtn()">
                                                 <span class="card-radio py-3 text-center text-truncate">
-                                                  <i class="bx bxl-paypal d-block h2 mb-3"></i>
-                                                  Paypal
+                                                    <i class="bx bxl-paypal d-block h2 mb-3"></i>
+                                                    Paypal
                                                 </span>
-                                              </label>
-                                            </div>
-                                          </div>
-                                          
-                                          <!-- PayPal button container -->
-                                          <div id="paypal-button-container" style="display: none;">
-                                            <!-- PayPal button will be rendered here -->
-                                          </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- PayPal Button Container -->
+                                    <div id="paypal-button-container" style="display: none;"></div> <!-- Initially hidden -->
+                                    
                                           
                                         <div class="col-lg-3 col-sm-6">
                                             <div>
                                                 <label class="card-radio-label">
-                                                    <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked="">
-
+                                                    <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" onclick="toggleCashOnDeliveryForm()">
                                                     <span class="card-radio py-3 text-center text-truncate">
                                                         <i class="bx bx-money d-block h2 mb-3"></i>
                                                         <span>Cash on Delivery</span>
@@ -541,6 +541,27 @@ a {
                                                 </label>
                                             </div>
                                         </div>
+                                        
+                                        <!-- Cash on Delivery Form -->
+                                        <div id="cashOnDeliveryForm" class="d-none">
+                                            <h5>Cash on Delivery Details</h5>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="recipientName" class="form-label">Recipient Name</label>
+                                                    <input type="text" class="form-control" id="recipientName" placeholder="Enter your name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="recipientPhone" class="form-label">Phone Number</label>
+                                                    <input type="tel" class="form-control" id="recipientPhone" placeholder="Enter your phone number" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="deliveryAddress" class="form-label">Delivery Address</label>
+                                                    <input type="text" class="form-control" id="deliveryAddress" placeholder="Enter your delivery address" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Confirm Cash on Delivery</button>
+                                            </form>
+                                        </div>
+                                        
                                         
                                     </div>
                                 </div>
@@ -563,7 +584,7 @@ a {
                 </div> <!-- end col -->
             </div> <!-- end row-->
         </div>
-        <div class="col-xl-4">
+        <!-- <div class="col-xl-4">
             <div class="card checkout-order-summary">
                 <div class="card-body">
                     <div class="p-3 bg-light mb-3">
@@ -656,7 +677,7 @@ a {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <!-- end row -->
     
@@ -729,18 +750,22 @@ a {
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-    <script src="path/to/auth.js"></script>
 
+
+
+    <!-- يا سهى هديل بتقلك هاي السكربته هي الي بتحطيها بكل مكان عشان الناف بار       -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            debugger
     // Check if the user is already logged in
-    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+    if (sessionStorage.getItem('userId') != 'null') {
         showLoggedInNavbar();
     } else {
         showLoggedOutNavbar();
     }
 
     function showLoggedInNavbar() {
+        debugger
         document.getElementById('navbar-links').innerHTML = `
             <a href="index.html" class="nav-item nav-link active">Home</a>
         <a href="myaccount.html" class="nav-item nav-link">Profile</a>
@@ -788,10 +813,76 @@ a {
 
 
 <!--================================-->
-
+<!--address-->
 <script>
+function loadUserProfile(userId) {
+    fetch(`https://localhost:44395/api/Order/address/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                // Assigning values to HTML elements
+                document.getElementById('userName').innerText = data.userName;  // Name
+                document.getElementById('addressInput').innerText = data.address;  // Address
+                document.getElementById('phoneInput').innerText = data.phone;  // Phone
+                
+                // If you have an image (optional)
+                if (data.Image) {
+                    document.getElementById('userImage').src = data.Image;
+                }
+            } else {
+                console.error('No user data found');
+            }
+        })
+        .catch(error => console.error('Error fetching user profile:', error));
+}
+
+// Call the function with the user ID
+loadUserProfile(2); // Example user ID
 
     
+</script>
+<!--================================-->
+<!--paypal-->
+
+<script src="https://www.paypal.com/sdk/js?client-id=ATjOH14GzEiGDx1toFn7gavXwJ201HS5xm5tzI_c_N0Nrj6vQ2jQjjOHcCH-qC7WE3o9qMrwzIp4cwAh&currency=USD"></script>
+<script>
+    function togglePaypalBtn() {
+        const paypalContainer = document.getElementById('paypal-button-container');
+        
+        // Show the PayPal button container
+        paypalContainer.style.display = 'block';
+
+        // Render the PayPal button
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00' // Amount to be charged
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                });
+            }
+        }).render('#paypal-button-container'); // Display the PayPal button
+    }
+</script>
+
+
+<script>
+    function toggleCashOnDeliveryForm() {
+    const form = document.getElementById('cashOnDeliveryForm');
+    if (form.classList.contains('d-none')) {
+        form.classList.remove('d-none');
+    } else {
+        form.classList.add('d-none');
+    }
+}
+
 </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -804,6 +895,8 @@ a {
     <script src="lib/parallax/parallax.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="path/to/auth.js"></script>
+
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

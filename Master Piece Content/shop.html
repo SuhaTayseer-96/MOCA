@@ -271,8 +271,42 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script>
+    <!-- <script>
         async function fetchRestaurantMenu() {
+            var id = localStorage.getItem('restaurant');
+            console.log(id);
+    
+            const response = await fetch(`https://localhost:44395/api/Restaurant/${id}/menu`);
+            const menuItems = await response.json();
+    
+            const menuContainer = document.getElementById('menuD');
+            menuContainer.innerHTML = '';
+    
+            menuItems.forEach(item => {
+                menuContainer.innerHTML += `
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <img class="img-fluid" src="${item.image}" alt="${item.foodName}" 
+                 style="height: 200px; width: 100%; object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">${item.foodName}</h5>
+                <p class="card-text">Price: $${item.price}</p>
+                <button class="btn btn-primary" onclick="addToCart(${item.foodId}, 1)">Add To Cart</button>
+
+            </div>
+        </div>
+    </div>
+`;
+            });
+        }
+        window.onload = fetchRestaurantMenu;
+
+    </script> -->
+
+<script>
+debugger
+
+async function fetchRestaurantMenu() {
             var id = localStorage.getItem('restaurant');
             console.log(id);
     
@@ -292,7 +326,7 @@
             <div class="card-body">
                 <h5 class="card-title">${item.foodName}</h5>
                 <p class="card-text">Price: $${item.price}</p>
-                <button class="btn btn-primary" onclick="addToCart(${item.foodId}, 1)">Add To Cart</button>
+                <button class="btn btn-primary" onclick="addToCart(${item.foodId}, ${1})">Add To Cart</button>
 
             </div>
         </div>
@@ -300,27 +334,18 @@
 `;
             });
         }
+        // window.onload = fetchRestaurantMenu;
+        fetchRestaurantMenu();
 
+async function addToCart(foodId, quantity) {
+    debugger
 
-
-        
-    
-        window.onload = fetchRestaurantMenu;
-
-
-
-
-
-
-
-    </script>
-
-<script>async function addToCart(foodId, quantity) {
     const userId = localStorage.getItem('userId'); // Make sure the user ID is stored in localStorage
-    if (!userId) {
-        alert('You must be logged in to add items to the cart');
-        return;
-    }
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    // if (!userId) {
+    //     alert('You must be logged in to add items to the cart');
+    //     return;
+    // }
 
     const cartItemDto = {
         UserID: parseInt(userId),
@@ -328,8 +353,15 @@
         Quantity: quantity
     };
 
+   
     try {
-        const response = await fetch('https://localhost:44395/api/CartItems', {
+        if(isLoggedIns == null)
+    {
+        alert('You must be logged in to add items to the cart');
+        window.location.reload();
+    }
+    else{
+        const response = await fetch('https://localhost:44395/api/Restaurant/api/CartItems', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -343,7 +375,7 @@
             const errorData = await response.json();
             alert('Failed to add item to cart: ' + errorData.message);
         }
-    } catch (error) {
+    } }catch (error) {
         console.error('Error adding item to cart:', error);
         alert('An error occurred while adding item to cart');
     }
@@ -395,7 +427,7 @@
 
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                 <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
-                <a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
+                <a href="login.html"; class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
                     <i class="fa fa-arrow-right ms-3"></i>
                 </a>
                 <div id="joinUsPopup" class="login-popup" style="display: none;">

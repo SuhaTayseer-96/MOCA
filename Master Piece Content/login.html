@@ -76,30 +76,23 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0" id="navbar-links">            ">
+        <div class="navbar-nav ms-auto p-4 p-lg-0" id="navbar-links">
             <a href="index.html" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="service.html" class="nav-item nav-link">Services</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu bg-light m-0">
-                    <a href="blogs.html" class="dropdown-item">Blogs</a>
-                    <a href="storelist.html" class="dropdown-item">Restaurant Lists</a>
-                    <a href="shop.html" class="dropdown-item">Shop</a>
-                    <!-- <a href="product.html" class="dropdown-item">Single Product</a> -->
-                    <a href="myaccount.html" class="dropdown-item">My Account</a>
-                    <a href="subAdmin/uena.dexignzone.com/cakephp/demo/uena-admin/AdminDash.html" class="dropdown-item">Super Admin</a>
-                    <a href="admin/html.phoenixcoded.net/light-able/bootstrap/application/account-profile.html" class="dropdown-item">Admin</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
-                </div>
-            </div>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
-            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;" >Donate</a>
+            <a href="storelist.html" class="nav-item nav-link active">Deals</a>
+            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
 
+            <!-- Cart and Profile (Hidden by default) -->
+           
+
+            <!-- Join Us Button (Visible by default) -->
+            <a href="login.html" id="authButton" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Join us
+                <i class="fa fa-arrow-right ms-3"></i></a>
        
-<!-- Join Us Button -->
-<a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
-<i class="fa fa-arrow-right ms-3"></i></a>
+
+
 
 <!-- Popup Section -->
 <div id="joinUsPopup" class="login-popup">
@@ -143,12 +136,12 @@
                     <!-- Username/Email -->
                     <div class="mb-3">
                         <label for="username" class="form-label">Username or Email Address *</label>
-                        <input type="email" class="form-control" id="username" placeholder="Enter your email" required>
+                        <input type="email" class="form-control" id="username" placeholder="Enter your email" name="Email" required>
                     </div>
                     <!-- Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password *</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password" name="Password" required>
                     </div>
                     <!-- Remember Me and Forgot Password -->
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -160,7 +153,7 @@
                     </div>
                     <!-- Login Button -->
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                        <button type="submit" onclick="login()" class="btn btn-primary w-100" >Login</button>
                     </div>
                 </form>
             </div>
@@ -243,93 +236,118 @@
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    
+    
+    
+    <!--////////////////////////////////////////////////////////////////////-->
+    <!-- <script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Check if the user is already logged in
-    if (sessionStorage.getItem('isLoggedIn') === 'true') {
-        showLoggedInNavbar();
-    } else {
-        showLoggedOutNavbar();
-    }
+        debugger
+        document.addEventListener('DOMContentLoaded', async function() {
+            const loginForm = document.getElementById('loginForm');
+            const Url = 'https://localhost:44395/api/Users/login'
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+        
+                // Use fetch to send data to the server
+                fetch(Url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username, password: password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Store the user ID from the server response in local storage
+                        localStorage.setItem('userId', data.userId);
+                        window.location.href = 'home.html';
+                    } else {
+                        alert('Invalid login credentials.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+        </script>
+         -->
+        
+         <script>
+            var url = "https://localhost:44395/api/Users/login";
+var form = document.getElementById("loginForm");
 
-    // Handle login form submission
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent form from submitting
+async function login() {
+    event.preventDefault(); 
+    debugger
 
-        // Capture user input (you should validate this with a backend in real implementation)
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    var data = new FormData(form); // 
 
-        // Dummy login check (replace with real validation)
-        if (username && password) {
-            // Set sessionStorage for the login status
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('username', username); // You can save user info if needed
+    try {
+        var response = await fetch(url, {
+            method: "POST",
+            body: data
+        });
 
-            // Update the navbar
-            showLoggedInNavbar();
+        if (response.ok) {
 
-            // Redirect to home or wherever after login
-            window.location.href = 'index.html';
+            var result = await response.json();
+
+            localStorage.setItem('userId', result.userId);
+
+
+            alert("Login successful");
+
+
+            window.location.href = "index.html";
         } else {
-            alert('Please enter valid login credentials.');
+            var errorMessage = await response.text(); 
+            alert("error: " + errorMessage); 
         }
-    });
+    } catch (error) {
+        console.error('Error:', error);
+        alert("server error");
+    }
+}
+         </script>
 
-    // Example logout function
-    function logoutUser() {
-        // Remove login status
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('username');
 
-        // Update the navbar
-        showLoggedOutNavbar();
+<!--///////////////////join uss /////////////////-->
+<script>
 
-        // Redirect to home or login page after logout
-        window.location.href = 'index.html';
+
+    var authButton = document.getElementById("authButton");
+    var profileButton = document.getElementById("profileButton");
+
+    function checkLoginStatus() {
+        var userId = localStorage.getItem('userId');
+        if (userId) {
+            authButton.innerText = "Logout";
+            authButton.href = "#"; // 
+            authButton.addEventListener('click', logout); //
+
+            profileButton.style.display = "inline-block";
+        } else {
+            authButton.innerText = "Join Us";
+            authButton.href = "login.html"; // 
+
+            profileButton.style.display = "none";
+        }
     }
 
-    // Function to display navbar for logged in users
-    function showLoggedInNavbar() {
-        document.getElementById('navbar-links').innerHTML = `
-            <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="myaccount.html" class="nav-item nav-link">Profile</a>
-            <a href="cart.html" class="nav-item nav-link">Cart</a>
-            <a href="javascript:void(0);" class="nav-item nav-link" onclick="logoutUser()">Logout</a>
-            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
-        `;
+    function logout() {
+        localStorage.removeItem('userId');
+        alert("Logged in Successfully");
+
+        window.location.href = "index.html";
     }
 
-    // Function to display navbar for logged out users
-    function showLoggedOutNavbar() {
-        document.getElementById('navbar-links').innerHTML = `
-            <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="storelist.html" class="nav-item nav-link active">Deals</a>
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
-            <a href="donate.html" class="nav-item nav-link" style="color:#FFC107; font-weight: bold;">Donate</a>
-            <a href="javascript:void(0);" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block" id="joinUsBtn">Join us
-                <i class="fa fa-arrow-right ms-3"></i>
-            </a>
-            <div id="joinUsPopup" class="login-popup" style="display: none;">
-                <a href="login.html" class="button-main w-full text-center">Login</a>
-                <div class="text-secondary text-center mt-2 pb-3" style="font-size: large;">
-                    Don’t have an account?
-                    <a href="register.html" class="text-black pl-1 hover:underline">Register</a>
-                </div>
-                <div class="bottom pt-3 border-t border-line"></div>
-                <a href="#!" class="body1 hover:underline">Support</a>
-            </div>
-        `;
-    }
-});
-
-</script>
-<script src="path/to/auth.js"></script>
-
+        </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
