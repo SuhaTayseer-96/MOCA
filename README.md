@@ -10,7 +10,8 @@ Tech Stack Frontend: HTML, CSS, Bootstrap, Backend: ASP.NET Core API, Database: 
 
 Figma: https://www.figma.com/design/Jpg9bLz1jbiWVfH2HLX6zx/Masterpiece?node-id=0-1&node-type=canvas&t=hSj87v7gHn3recB3-0
 
-Documentation: https://docs.google.com/document/d/1ep5SQK3m8xuEiRSZjGRL0LfS1g7eT3Wp4sT8n7ZNDxI/edit?usp=sharing
+Documentation: https://docs.google.com/document/d/1ep5SQK3m8xuEiRSZjGRL0LfS1g7eT3Wp4sT8n7ZNDxI/edit?tab=t.0#heading=h.w7j3jzs8nfxg
+
 
 Presentation + Business model: https://www.canva.com/design/DAGRZ7RSENA/3CL3wpx7hYfoS5FSi5O-AQ/edit?utm_content=DAGRZ7RSENA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
